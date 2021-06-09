@@ -1,6 +1,10 @@
 #!/usr/bin/python
 
 class Code:
+    """
+    Stores the dictionary in charge of returning the right binary sequence.
+    """
+
     def __init__(self):
         self._dest = {None: "000",
                       "M": "001",
@@ -48,10 +52,19 @@ class Code:
                       "D|M": "1010101"}
 
     def dest(self, strDest):
+        """
+        Returns the dest binary sequence.
+        """
         return self._dest.get(strDest, None)
 
     def comp(self, strComp):
+        """
+        Returns the comp binary sequence
+        """
         return self._comp.get(strComp, None)
 
     def jump(self, strJump):
+        """
+        Returns the jump binary sequence
+        """
         return self._jump.get(strJump, None)

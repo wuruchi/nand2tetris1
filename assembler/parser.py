@@ -3,10 +3,18 @@ from collections import deque
 
 
 class Parser:
+    """
+    Parses the input .asm file
+    """
+
     def __init__(self, filename):
+        """
+        filename: Path to the source file
+        """
         result_content = deque()
         with open(filename, 'r') as f:
             content = f.readlines()
+            # Ignore irrelevant text
             for line in content:
                 line = str(line).strip()
                 if len(line) > 0 and not line.startswith("//"):
@@ -20,6 +28,9 @@ class Parser:
         self.currentCommand = None
 
     def advance(self):
+        """
+        Gets the next line of code
+        """
         if self.hasMoreComannds == True:
             if len(self.body) == 1:
                 self.hasMoreComannds = False
@@ -30,6 +41,9 @@ class Parser:
             self.currentCommand = None
 
     def getCurrentLine(self):
+        """
+        Return the current line index (ignores labels)
+        """
         return self._currentLine if self._currentLine >= 0 else 0
 
     def commandType(self):
@@ -55,6 +69,7 @@ class Parser:
             if self.currentCommand.find("=") > 0:
                 return self.currentCommand[0:self.currentCommand.find('=')]
             else:
+                # if '=' is not found, there is no dest
                 return None
             # if self.currentCommand.find(";") > 0:
             #     dest = self.currentCommand[0:self.currentCommand.find(";")]
@@ -80,11 +95,3 @@ class Parser:
             if self.currentCommand.find(";") > 0:
                 return self.currentCommand[self.currentCommand.find(";") + 1:]
         return None
-
-        # if len(self.body) > 0:
-        #   line = self.body.popleft()
-        # else:
-
-        # with open(output_file_name, "w") as f:
-        #     for line in result_content:
-        #         f.write(line + "\n")

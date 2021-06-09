@@ -1,6 +1,10 @@
 #!/usr/bin/python
 
 class SymbolTable():
+    """
+    Stores memory addresses and variable values
+    """
+
     def __init__(self):
         self._table = {"SP": 0,
                        "LCL": 1,
